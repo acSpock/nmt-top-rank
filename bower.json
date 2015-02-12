@@ -1,1 +1,17 @@
-bower.json
+{
+	"name": "nmt",
+	"version": "1.0.0",
+	"dependencies": {
+		"bootstrap": "latest",
+		"angular": "latest",
+		"bootstrap-sass-official": "latest",
+		"jquery": "latest",
+		"jquery-ui": "latest",
+		"angular-bootstrap": "latest",
+		"angular-animate": "latest",
+		"underscore": "latest",
+		"angular-ui-router": "latest",
+		"font-awesome": "latest",
+		"angular-sanitize": "latest"
+	}
+}
