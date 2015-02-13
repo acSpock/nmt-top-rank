@@ -10,8 +10,10 @@ module.exports = function(grunt){
 		'public/libs/angular-sanitize/angular-sanitize.js',
 		'public/libs/angular-bootstrap/ui-bootstrap-tpls.js',
 		'public/libs/angular-ui-router/release/angular-ui-router.js',
-		'public/js/modules/app.js',
-		'public/js/modules/routing.js',
+		'public/libs/restangular/dist/restangular.js',
+		'public/js/modules/nmt-App.js',
+		'public/js/modules/nmt-AppConfig.js',
+		'public/js/modules/nmt-Routing.js',
 		'public/js/controllers/mainController.js',
 		'public/js/services/**/*.js'
 	],

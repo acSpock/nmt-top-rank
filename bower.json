@@ -12,6 +12,7 @@
 		"underscore": "latest",
 		"angular-ui-router": "latest",
 		"font-awesome": "latest",
-		"angular-sanitize": "latest"
+		"angular-sanitize": "latest",
+		"restangular":"latest"
 	}
 }
