@@ -3,16 +3,18 @@ factory('PlaylistService', ['$log', 'SpotifyService', function($log, SpotifyServ
 
 	var PlaylistService = {
 
-		getPlaylistById = function(userId, playlistId){
-			var this = self;
-			return SpotifyService.one('v1/users', userId).one('playlists', playlistId).get().then(function(response){
+		getPlaylistById : function(userId, playlistId){
+			var self = this;
+			return SpotifyService.one('v1/users', 'spotify').one('playlists', '1yHZ5C3penaxRdWR7LRIOb').get().then(function(response){
 				self.playlist = response;
-
 				$log.debug('getPlaylistById', self.playlist);
-				return self.playlist
+				return self.playlist;
 			}, function(response){
 				$log.debug('error', response);
 			});
 		}
-	}	
-}])
+	};
+
+	return PlaylistService;
+
+}]);
