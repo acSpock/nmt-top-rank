@@ -15,7 +15,8 @@ module.exports = function(grunt){
 		'public/js/modules/nmt-AppConfig.js',
 		'public/js/modules/nmt-Routing.js',
 		'public/js/controllers/mainController.js',
-		'public/js/services/**/*.js'
+		'public/js/services/**/*.js',
+		'public/js/filters/**/*.js'
 	],
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -24,7 +25,9 @@ module.exports = function(grunt){
 				options: {
 					loadPath: [
 						'public/libs/bootstrap-sass-official/assets/stylesheets/',
-						'public/libs/font-awesome/scss'
+						'public/libs/bootstrap-sass-official/assets/stylesheets/bootstrap/',
+						'public/libs/font-awesome/scss',
+						'public/libs/bootswatch-scss/cyborg/'
 					],
 					style: 'compressed'
 				},

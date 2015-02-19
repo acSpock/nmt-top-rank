@@ -2,7 +2,7 @@ angular.module('nmtApp')
 .constant('nmtAppConfig',{
 	environment: {
 		dev: {
-			host: 'https://api.spotify.com/'
+			host: 'http://localhost:3000'
 		}
 	}
 })

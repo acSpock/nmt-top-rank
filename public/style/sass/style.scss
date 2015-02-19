@@ -1,7 +1,52 @@
-@import "bootstrap";
-@import "font-awesome";
+@import "public/libs/bootswatch-scss/cyborg/variables";
+@import "public/libs/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
+@import "public/libs/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "public/libs/bootswatch-scss/cyborg/bootswatch";
 
 html, body {
 	min-height: 100%;
 	height: 100%;
+}
+
+a{
+	cursor: pointer;
+	transition: color .1s ease;
+	-moz-transition: color .1s ease;
+	-webkit-transition: color .1s ease;
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+input[type=text]{
+	border: 1px solid gray;
+	background-color: #222;
+	width: 100%;
+}
+
+.form-control:focus {
+	border-color: #81B819;
+}
+
+#main-wrap{
+	padding-top: 55px;
+
+	.playlistTitle{
+		color:#81B819;
+		font-size: 26px;
+	}
+
+	#currentPlaylist{
+		table{
+			thead{
+				a{
+					text-decoration: none;
+					&:hover{
+						text-decoration: none;
+						color:#81B819;
+					}
+				}
+			}
+		}
+	}
 }

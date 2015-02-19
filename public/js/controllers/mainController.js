@@ -1,13 +1,16 @@
 angular.module('nmtApp.controllers').
 controller('MainController', ['$scope', 'PlaylistService', function($scope, PlaylistService){
-	$scope.playlist = null;
+	$scope.nmt = null;
+	$scope.nmtMeta = null;
 
-	$scope.getPlaylistById = function(userId, playlistId){
-		PlaylistService.getPlaylistById().then(function(response){
-			$scope.playlist = response;
+	$scope.getNMT = function(){
+		PlaylistService.getNMT().then(function(response){
+			$scope.nmt = response.tracks.items;
+			$scope.nmtMeta = response;
 		});
 	};
 
-	$scope.getPlaylistById();
+	$scope.getNMT();
+	
 
 }]);

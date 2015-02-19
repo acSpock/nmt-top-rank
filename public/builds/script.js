@@ -1,4 +1,4 @@
-/*! nmt 2015-02-12 */
+/*! nmt 2015-02-18 */
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -66774,7 +66774,7 @@ angular.module('nmtApp', [
 .constant('nmtAppConfig',{
 	environment: {
 		dev: {
-			host: 'https://api.spotify.com/'
+			host: 'http://localhost:3000'
 		}
 	}
 })
@@ -66815,33 +66815,45 @@ angular.module('nmtApp', [
 	});	
 }]);;angular.module('nmtApp.controllers').
 controller('MainController', ['$scope', 'PlaylistService', function($scope, PlaylistService){
-	$scope.playlist = null;
+	$scope.nmt = null;
+	$scope.nmtMeta = null;
 
-	$scope.getPlaylistById = function(userId, playlistId){
-		PlaylistService.getPlaylistById().then(function(response){
-			$scope.playlist = response;
+	$scope.getNMT = function(){
+		PlaylistService.getNMT().then(function(response){
+			$scope.nmt = response.tracks.items;
+			$scope.nmtMeta = response;
 		});
 	};
 
-	$scope.getPlaylistById();
+	$scope.getNMT();
+	
 
 }]);;angular.module('nmtApp.services').
 factory('PlaylistService', ['$log', 'SpotifyService', function($log, SpotifyService){
 
 	var PlaylistService = {
 
-		getPlaylistById : function(userId, playlistId){
+		getNMT : function(userId, playlistId){
 			var self = this;
-			return SpotifyService.one('v1/users', 'spotify').one('playlists', '1yHZ5C3penaxRdWR7LRIOb').get().then(function(response){
-				self.playlist = response;
-				$log.debug('getPlaylistById', self.playlist);
-				return self.playlist;
+			return SpotifyService.one('api/nmt').get().then(function(response){
+				self.nmtPlaylist = response;
+				$log.debug('getNMT', self.nmtPlaylist.tracks.items);
+				return self.nmtPlaylist;
 			}, function(response){
-				$log.debug('error', response);
+				$log.debug('error', response.tracks.items);
 			});
 		}
 	};
 
 	return PlaylistService;
 
+}]);
+;angular.module('nmtApp.filters').
+filter('object2Array', [function(){
+	return function(input) {
+		for(var i in input){
+			input[i].popularity = input[i].track.popularity;
+		}
+		return input;
+	};
 }]);

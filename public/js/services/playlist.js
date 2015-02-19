@@ -3,14 +3,14 @@ factory('PlaylistService', ['$log', 'SpotifyService', function($log, SpotifyServ
 
 	var PlaylistService = {
 
-		getPlaylistById : function(userId, playlistId){
+		getNMT : function(userId, playlistId){
 			var self = this;
-			return SpotifyService.one('v1/users', 'spotify').one('playlists', '1yHZ5C3penaxRdWR7LRIOb').get().then(function(response){
-				self.playlist = response;
-				$log.debug('getPlaylistById', self.playlist);
-				return self.playlist;
+			return SpotifyService.one('api/nmt').get().then(function(response){
+				self.nmtPlaylist = response;
+				$log.debug('getNMT', self.nmtPlaylist.tracks.items);
+				return self.nmtPlaylist;
 			}, function(response){
-				$log.debug('error', response);
+				$log.debug('error', response.tracks.items);
 			});
 		}
 	};
