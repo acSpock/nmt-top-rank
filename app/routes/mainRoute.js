@@ -13,7 +13,7 @@ module.exports = function(app){
 		redirectUri : redirectUri
 	});
 
-	spotifyApi.clientCredentialsGrant()
+	/*spotifyApi.clientCredentialsGrant()
 		.then(function(data) {
 			console.log('The access token expires in ' + data['expires_in']);
 			console.log('The access token is ' + data['access_token']);
@@ -25,7 +25,7 @@ module.exports = function(app){
 
 		  }, function(err) {
 				console.log('Something went wrong when retrieving an access token', err);
-		  });
+		  });*/
 
 
 	app.get('/api/nmt', function(req, res) {

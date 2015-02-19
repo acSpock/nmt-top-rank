@@ -3,7 +3,7 @@ factory('PlaylistService', ['$log', 'SpotifyService', function($log, SpotifyServ
 
 	var PlaylistService = {
 
-		getNMT : function(userId, playlistId){
+		getNMT:function(userId, playlistId){
 			var self = this;
 			return SpotifyService.one('api/nmt').get().then(function(response){
 				self.nmtPlaylist = response;

@@ -17,13 +17,13 @@
 				</div>				
 				<div class="form-group col-md-6">
 					<span class="playlistTitle">
-						<input style="width: 100%" type="text" class="form-control search-query span2 input-sm" placeholder="Enter playlist URI">
+						<form>
+							<input ng-model="playlistURI" style="width: 100%" type="text" class="form-control search-query span2 input-sm" placeholder="Enter playlist URI">
+							<button class="btn btn-primary" ng-click="parseURI()"></button>
+						</form>
 					</span>
 				</div>
 			</div>
-
-
-
 			<br>
 			<div id="currentPlaylist" class="panel panel-default">
 				<table class="table table-striped table-hover table-default">
@@ -50,7 +50,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="builds/script.js"></script>
 </body>
 </html>
