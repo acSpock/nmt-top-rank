@@ -66775,6 +66775,9 @@ angular.module('nmtApp', [
 	environment: {
 		dev: {
 			host: 'http://localhost:3000'
+		},
+		prod: {
+			host: 'https://nmtapp.herokuapp.com'
 		}
 	}
 })
@@ -66807,12 +66810,20 @@ angular.module('nmtApp', [
 	})
 	.state('home', {
 		url: '/home',
-		templateUrl: '',
-		controller: '',
+		templateUrl: 'views/home.html',
+		controller: 'MainController',
 		data: {
 			contentPages: 1,
 		}
-	});	
+	})	
+	.state('dev', {
+		url: '/dev',
+		templateUrl: 'views/dev.html',
+		controller: 'MainController',
+		data: {
+			contentPages: 1,
+		}
+	});
 }]);;angular.module('nmtApp.controllers').
 controller('MainController', ['$scope', 'PlaylistService', function($scope, PlaylistService){
 	$scope.playlistURI = null;

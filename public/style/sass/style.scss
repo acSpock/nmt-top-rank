@@ -32,8 +32,10 @@ input[type=text]{
 	padding-top: 55px;
 
 	.playlistTitle{
-		color:#81B819;
-		font-size: 26px;
+		span{
+			color:#81B819;
+			font-size: 26px;
+		}
 	}
 
 	#currentPlaylist{

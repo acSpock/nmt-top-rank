@@ -4,8 +4,8 @@ angular.module('nmtApp')
 		dev: {
 			host: 'http://localhost:3000'
 		},
-		prod:{
-			host: 'http://andyspock.com'
+		prod: {
+			host: 'https://nmtapp.herokuapp.com'
 		}
 	}
 })

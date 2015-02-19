@@ -16,10 +16,18 @@ angular.module('nmtApp')
 	})
 	.state('home', {
 		url: '/home',
-		templateUrl: '',
-		controller: '',
+		templateUrl: 'views/home.html',
+		controller: 'MainController',
 		data: {
 			contentPages: 1,
 		}
-	});	
+	})	
+	.state('dev', {
+		url: '/dev',
+		templateUrl: 'views/dev.html',
+		controller: 'MainController',
+		data: {
+			contentPages: 1,
+		}
+	});
 }]);
