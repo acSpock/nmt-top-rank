@@ -3,6 +3,9 @@ angular.module('nmtApp')
 	environment: {
 		dev: {
 			host: 'http://localhost:3000'
+		},
+		prod:{
+			host: 'http://andyspock.com'
 		}
 	}
 })

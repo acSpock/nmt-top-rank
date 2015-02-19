@@ -10,19 +10,15 @@
 	<div id="main-wrap">
 		<div class="container">
 			<div class="row">
-				<div class="form-group col-md-6">
-					<span class="playlistTitle">
-						{{nmtMeta.name}}
-					</span>
+				<div class="playlistTitle form-group col-md-6">
+					<span ng-show="playlistMeta">{{playlistMeta.name}}</span>
+					<span ng-hide="playlistMeta">Playlists By Popularity</span>
 				</div>				
-				<div class="form-group col-md-6">
-					<span class="playlistTitle">
-						<form>
-							<input ng-model="playlistURI" style="width: 100%" type="text" class="form-control search-query span2 input-sm" placeholder="Enter playlist URI">
-							<button class="btn btn-primary" ng-click="parseURI()"></button>
-						</form>
-					</span>
-				</div>
+				<div class="form-group col-md-4">
+						<input ng-model="playlistURI" style="width: 100%" type="text" class="form-control search-query span2" placeholder="Enter playlist URI">
+				</div>				
+					<button ng-disabled="!playlistURI" class="btn btn-primary btn-md" ng-click="getPlaylist()">Get Playlist</button>
+					<button class="btn btn-success btn-md" ng-click="getNMT()">Get NMT</button>
 			</div>
 			<br>
 			<div id="currentPlaylist" class="panel panel-default">
@@ -34,7 +30,7 @@
 						<th></th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="track in nmt | object2Array | orderBy: '-popularity'">
+						<tr ng-repeat="track in playlist | object2Array | orderBy: '-popularity'">
 							<td>
 								{{track.track.name}}
 							</td>
@@ -46,7 +42,8 @@
 							</td>
 						</tr>
 					</tbody>
-				</table>				
+				</table>
+				<div class="panel-body empty text-center" ng-show="playlist === null">No Playlist Found</div>				
 			</div>
 		</div>
 	</div>
