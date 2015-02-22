@@ -1,5 +1,5 @@
 angular.module('nmtApp.controllers').
-controller('MainController', ['$scope', 'PlaylistService', function($scope, PlaylistService){
+controller('MainController', ['$scope', 'PlaylistService', '$filter', function($scope, PlaylistService, $filter){
 	$scope.playlistURI = null;
 	$scope.user = null;
 	$scope.playlist = null;
@@ -9,7 +9,7 @@ controller('MainController', ['$scope', 'PlaylistService', function($scope, Play
 	var uriSliced = null;
 
 
-	/*
+	/*a
 	* got to parse URI for http links or URI links - YOLO ** 
 	* grabs user name and playlist #
 	*/
@@ -31,6 +31,7 @@ controller('MainController', ['$scope', 'PlaylistService', function($scope, Play
 		PlaylistService.getPlaylist($scope.spotify).then(function(response){
 			$scope.playlist = response.tracks.items;
 			$scope.playlistMeta = response;
+			}
 		});
 	};
 

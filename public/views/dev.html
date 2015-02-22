@@ -6,7 +6,36 @@
 		</div>	
 	</div>
 	<div class="row">
-		Will add Todos on this page
-		<p>hhttps://developer.spotify.com/web-api/get-playlists-tracks/#comment-1680934513</p>
+		<p></p>
+		<div class="panel panel-default">
+			<table class="table table-striped">
+				<thead>
+					<th>Todo Item</th>
+					<th>Date Created</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="todo in todos">
+						<td>{{todo.text}}</td>
+						<td>{{todo.time}}</td>
+						<td>
+							<button class="btn btn-xs btn-danger" ng-click="deleteTodo(todo._id)">Remove</button>				
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div id="todo-form" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="Add Todo" ng-model="formData.text">
+					</div>
+					<button class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+				</form>
+			</div>
+
+		</div>
 	</div>	
 </div>

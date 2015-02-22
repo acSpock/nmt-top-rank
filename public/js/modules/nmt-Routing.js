@@ -25,7 +25,7 @@ angular.module('nmtApp')
 	.state('dev', {
 		url: '/dev',
 		templateUrl: 'views/dev.html',
-		controller: 'MainController',
+		controller: 'DevController',
 		data: {
 			contentPages: 1,
 		}

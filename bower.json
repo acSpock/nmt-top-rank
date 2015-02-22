@@ -13,6 +13,7 @@
 		"angular-ui-router": "latest",
 		"font-awesome": "latest",
 		"angular-sanitize": "latest",
-		"restangular":"latest"
+		"restangular":"latest",
+		"moment":"latest"
 	}
 }
