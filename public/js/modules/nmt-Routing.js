@@ -29,5 +29,13 @@ angular.module('nmtApp')
 		data: {
 			contentPages: 1,
 		}
+	})	
+	.state('playlistSearch', {
+		url: '/playlist-search?val',
+		templateUrl: 'views/playlistSearch.html',
+		controller: 'SearchController',
+		data: {
+			contentPages: 1,
+		}
 	});
 }]);

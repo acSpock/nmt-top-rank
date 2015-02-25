@@ -17,6 +17,7 @@ module.exports = function(grunt){
 		'public/js/modules/nmt-Routing.js',
 		'public/js/controllers/mainController.js',
 		'public/js/controllers/devController.js',
+		'public/js/controllers/searchController.js',
 		'public/js/services/**/*.js',
 		'public/js/filters/**/*.js'
 	],

@@ -23,6 +23,23 @@ a{
 }
 
 
+.box{
+	p{
+		padding-top: 50%;
+		color: white;
+	}
+
+	&:hover{
+		opacity: .8;
+		cursor: pointer;
+	}
+
+	height: 200px;
+	width: 200px;
+	margin-right: 15px;
+	margin-top: 15px;
+}
+
 input[type=text]{
 	border: 1px solid gray;
 	background-color: #222;
@@ -34,7 +51,7 @@ input[type=text]{
 }
 
 #main-wrap{
-	padding-top: 55px;
+	padding-top: 0px;
 
 	.playlistTitle{
 		span{

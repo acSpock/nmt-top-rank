@@ -1,0 +1,21 @@
+<div class="container">
+
+	<div id="search form" class="row">
+		<div class="col-sm-8 col-sm-offset-2 text-center">
+			<form ng-submit="searchPlaylist()">
+				<div class="form-group">
+					<input type="text" ng-model="searchWord" class="form-control" placeholder="Searh for Playlists">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div>
+		<div class="col-md-12">
+			<div ng-repeat="playlist in foundPlaylist" class="alpha60">
+				<div ng-click="getPlaylist(playlist.uri)" style="background: url({{playlist.images[0].url}})" class="box col-md-6">
+					<p class="text-center">{{playlist.name}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -3,9 +3,8 @@ factory('PlaylistService', ['$log', 'SpotifyService', function($log, SpotifyServ
 
 	var PlaylistService = {
 
-		getPlaylist:function(playlist){
+		getPlaylist: function(playlist){
 			var self = this;
-			console.log('playlist', playlist);
 			return SpotifyService.all('api/playlist').post(playlist).then(function(response){
 				self.playlist = response;
 				$log.debug('getPlaylist', self.playlist);
@@ -13,7 +12,20 @@ factory('PlaylistService', ['$log', 'SpotifyService', function($log, SpotifyServ
 			}, function(response){
 				$log.debug('error', response.tracks.items);
 			});
+		},		
+
+		searchPlaylists: function(searchWord){
+			var self = this;
+			console.log('searchWord');
+			return SpotifyService.one('api/searchForPlaylist' + "?search=" + searchWord).get().then(function(response){
+				self.playlist = response;
+				$log.debug('searchPlaylists', self.playlist);
+				return self.playlist;
+			}, function(response){
+				$log.debug('error', response);
+			});
 		},
+
 	};
 
 	return PlaylistService;

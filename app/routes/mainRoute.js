@@ -32,6 +32,7 @@ module.exports = function(app){
 			tokenExpirationEpoch = (new Date().getTime() / 1000) + data['expires_in'];
 			console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
 
+
 		}, function(err) {
 			console.log('Something went wrong!', err);
 		});
@@ -64,6 +65,23 @@ module.exports = function(app){
 		}, function(err) {
 			console.log('Something went wrong!', err);
 		});
+	});
+
+
+	
+	app.get('/api/searchForPlaylist', function(req, res){
+		//var search = req.param
+		console.log('req', req.query);
+
+
+	spotifyApi.searchPlaylists(req.query.search)
+	  .then(function(data) {
+	    console.log('Found playlists are', data);
+	    res.send(data);
+	  }, function(err) {
+	    console.log('Something went wrong!', err);
+	  });
+		
 	});
 
 

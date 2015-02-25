@@ -1,4 +1,4 @@
-/*! nmt 2015-02-22 */
+/*! nmt 2015-02-23 */
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -69866,10 +69866,17 @@ angular.module('nmtApp', [
 		data: {
 			contentPages: 1,
 		}
+	})	
+	.state('playlistSearch', {
+		url: '/playlist-search?val',
+		templateUrl: 'views/playlistSearch.html',
+		controller: 'SearchController',
+		data: {
+			contentPages: 1,
+		}
 	});
 }]);;angular.module('nmtApp.controllers').
-controller('MainController', ['$scope', 'PlaylistService', '$http', function($scope, PlaylistService, $http){
-	$scope.playlistURI = null;
+controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', '$stateParams', '$rootScope', function($scope, PlaylistService, $filter, $state, $stateParams, $rootScope){
 	$scope.user = null;
 	$scope.playlist = null;
 	$scope.playlistMeta = null;
@@ -69877,19 +69884,18 @@ controller('MainController', ['$scope', 'PlaylistService', '$http', function($sc
 	var httpSliced = null;
 	var uriSliced = null;
 
-
 	/*
 	* got to parse URI for http links or URI links - YOLO ** 
 	* grabs user name and playlist #
 	*/
 	
 	$scope.parseURI = function(){
-		if($scope.playlistURI.substring(0,4) === "http"){
-			httpSliced = $scope.playlistURI.split('/');
+		if($rootScope.playlistURI.substring(0,4) === "http"){
+			httpSliced = $rootScope.playlistURI.split('/');
 			$scope.spotify[0].user = httpSliced[4];
 			$scope.spotify[0].playlist = httpSliced[6];
 		}else{
-			uriSliced = $scope.playlistURI.split(':');
+			uriSliced = $rootScope.playlistURI.split(':');
 			$scope.spotify[0].user = uriSliced[2];
 			$scope.spotify[0].playlist = uriSliced[4];
 		}
@@ -69900,11 +69906,6 @@ controller('MainController', ['$scope', 'PlaylistService', '$http', function($sc
 		PlaylistService.getPlaylist($scope.spotify).then(function(response){
 			$scope.playlist = response.tracks.items;
 			$scope.playlistMeta = response;
-			if($scope.playlistMeta.tracks.next){
-				$http.get($scope.playlistMeta.tracks.next).success(function(response){
-					console.log('brah', response);
-				});
-			}
 		});
 	};
 
@@ -69915,8 +69916,11 @@ controller('MainController', ['$scope', 'PlaylistService', '$http', function($sc
 			$scope.playlist = response.tracks.items;
 			$scope.playlistMeta = response;
 		});
-	};
-	
+	};	
+
+	if($rootScope.playlistURI){
+		$scope.getPlaylist();
+	}
 
 }]);;angular.module('nmtApp.controllers').
 controller('DevController', ['$scope', '$http', '$log' ,function($scope, $http, $log){
@@ -69963,14 +69967,31 @@ controller('DevController', ['$scope', '$http', '$log' ,function($scope, $http, 
 	};
 	
 
+}]);;angular.module('nmtApp.controllers').
+controller('SearchController', ['$scope', 'PlaylistService', '$filter', '$state', '$stateParams', '$rootScope', function($scope, PlaylistService, $filter, $state, $stateParams, $rootScope){ 
+	$scope.foundPlaylist = null;
+	$scope.foundPlaylistMeta = null;
+	$scope.searchWord = null;
+
+	$scope.searchPlaylist = function(){
+		PlaylistService.searchPlaylists($scope.searchWord).then(function(response){
+			$scope.foundPlaylist = response.playlists.items;
+			$scope.foundPlaylistMeta = response;
+		});
+	};
+
+	$scope.getPlaylist = function(playlistUri){
+		$state.go('home');
+		$rootScope.playlistURI = playlistUri;
+	};
+
 }]);;angular.module('nmtApp.services').
 factory('PlaylistService', ['$log', 'SpotifyService', function($log, SpotifyService){
 
 	var PlaylistService = {
 
-		getPlaylist:function(playlist){
+		getPlaylist: function(playlist){
 			var self = this;
-			console.log('playlist', playlist);
 			return SpotifyService.all('api/playlist').post(playlist).then(function(response){
 				self.playlist = response;
 				$log.debug('getPlaylist', self.playlist);
@@ -69978,7 +69999,20 @@ factory('PlaylistService', ['$log', 'SpotifyService', function($log, SpotifyServ
 			}, function(response){
 				$log.debug('error', response.tracks.items);
 			});
+		},		
+
+		searchPlaylists: function(searchWord){
+			var self = this;
+			console.log('searchWord');
+			return SpotifyService.one('api/searchForPlaylist' + "?search=" + searchWord).get().then(function(response){
+				self.playlist = response;
+				$log.debug('searchPlaylists', self.playlist);
+				return self.playlist;
+			}, function(response){
+				$log.debug('error', response);
+			});
 		},
+
 	};
 
 	return PlaylistService;
