@@ -1,4 +1,4 @@
-/*! nmt 2015-02-23 */
+/*! nmt 2015-02-24 */
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -69827,7 +69827,7 @@ angular.module('nmtApp', [
 
 .factory('SpotifyService',['Restangular', 'nmtAppConfig', function(Restangular, nmtAppConfig){
 	return Restangular.withConfig(function(RestangularConfigurer){
-		var baseUrl = nmtAppConfig.environment.dev.host;
+		var baseUrl = nmtAppConfig.environment.prod.host;
 		RestangularConfigurer.setBaseUrl(baseUrl);
 	});
 }])

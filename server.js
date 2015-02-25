@@ -81,8 +81,8 @@ app.delete('/api/todos/:todo_id', function(req, res){
 
 
 // App port for Dev
-app.listen(3000, function(){
-	console.log('Magic happens on 3000');
+app.listen(5000, function(){
+	console.log('Magic happens on 5000');
 });
 
 exports = module.exports = app;
