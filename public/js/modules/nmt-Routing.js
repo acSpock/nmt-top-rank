@@ -15,7 +15,7 @@ angular.module('nmtApp')
 		}
 	})
 	.state('home', {
-		url: '/home',
+		url: '/home?playlist',
 		templateUrl: 'views/home.html',
 		controller: 'MainController',
 		data: {

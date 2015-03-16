@@ -71,7 +71,6 @@ module.exports = function(app){
 	
 	app.get('/api/searchForPlaylist', function(req, res){
 		//var search = req.param
-		console.log('req', req.query);
 
 
 	spotifyApi.searchPlaylists(req.query.search)

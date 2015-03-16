@@ -1,4 +1,4 @@
-/*! nmt 2015-02-24 */
+/*! nmt 2015-03-15 */
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -69817,7 +69817,7 @@ angular.module('nmtApp', [
 .constant('nmtAppConfig',{
 	environment: {
 		dev: {
-			host: 'http://localhost:3000'
+			host: 'http://localhost:5000'
 		},
 		prod: {
 			host: 'https://nmtapp.herokuapp.com'
@@ -69827,7 +69827,7 @@ angular.module('nmtApp', [
 
 .factory('SpotifyService',['Restangular', 'nmtAppConfig', function(Restangular, nmtAppConfig){
 	return Restangular.withConfig(function(RestangularConfigurer){
-		var baseUrl = nmtAppConfig.environment.prod.host;
+		var baseUrl = nmtAppConfig.environment.dev.host;
 		RestangularConfigurer.setBaseUrl(baseUrl);
 	});
 }])
@@ -69852,7 +69852,7 @@ angular.module('nmtApp', [
 		}
 	})
 	.state('home', {
-		url: '/home',
+		url: '/home?playlist',
 		templateUrl: 'views/home.html',
 		controller: 'MainController',
 		data: {
@@ -69883,25 +69883,26 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	$scope.spotify = [{user: null, playlist: null}];
 	var httpSliced = null;
 	var uriSliced = null;
-
+	$scope.playlistURI = $stateParams.playlist;
 	/*
 	* got to parse URI for http links or URI links - YOLO ** 
 	* grabs user name and playlist #
 	*/
 	
 	$scope.parseURI = function(){
-		if($rootScope.playlistURI.substring(0,4) === "http"){
+		if($scope.playlistURI.substring(0,4) === "http"){
 			httpSliced = $rootScope.playlistURI.split('/');
 			$scope.spotify[0].user = httpSliced[4];
 			$scope.spotify[0].playlist = httpSliced[6];
 		}else{
-			uriSliced = $rootScope.playlistURI.split(':');
+			uriSliced = $scope.playlistURI.split(':');
 			$scope.spotify[0].user = uriSliced[2];
 			$scope.spotify[0].playlist = uriSliced[4];
 		}
 	};
 
 	$scope.getPlaylist = function(){
+		$stateParams.playlist = $scope.playlistURI;
 		$scope.parseURI();
 		PlaylistService.getPlaylist($scope.spotify).then(function(response){
 			$scope.playlist = response.tracks.items;
@@ -69918,7 +69919,7 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 		});
 	};	
 
-	if($rootScope.playlistURI){
+	if($scope.playlistURI){
 		$scope.getPlaylist();
 	}
 
