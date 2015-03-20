@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 
 // Server Connect
-mongoose.connect('mongodb://acspock:herbert@proximus.modulusmongo.net:27017/yguG5yra'); // connect to mongoDB database on modulus.io
+//mongoose.connect('mongodb://acspock:herbert@proximus.modulusmongo.net:27017/yguG5yra'); // connect to mongoDB database on modulus.io
 
 var Todo = mongoose.model('Todos', {
 	text : String,
@@ -61,7 +61,7 @@ app.post('/api/todos', function(req, res){
 
 // delete a todo
 
-app.delete('/api/todos/:todo_id', function(req, res){
+app.delete('/api/todos/:todo_id', function(reqs, res){
 	Todo.remove({
 		_id : req.params.todo_id
 	}, function(err, todo){
@@ -79,10 +79,12 @@ app.delete('/api/todos/:todo_id', function(req, res){
 	});
 });
 
+var port = process.env.PORT || 5000;
 
 // App port for Dev
-app.listen(5000, function(){
+app.listen(port, function(){
 	console.log('Magic happens on 5000');
 });
+
 
 exports = module.exports = app;
