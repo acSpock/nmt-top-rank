@@ -5,7 +5,7 @@ angular.module('nmtApp')
 			host: 'http://localhost:5000'
 		},
 		prod: {
-			host: 'https://nmtapp.herokuapp.com:5000'
+			host: 'https://nmtapp.herokuapp.com'
 		}
 	}
 })
