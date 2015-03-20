@@ -3,19 +3,19 @@
 		<div class="playlistTitle form-group col-md-6">
 			<span ng-show="playlistMeta">{{playlistMeta.name}}</span>
 			<span ng-hide="playlistMeta">Playlists Popular Songs</span>
-			<a ui-sref="dev">Dev</a>	
-		</div>				
+			<!-- <a ui-sref="dev">Dev</a>	 -->
+		</div>			
 		<div class="form-group col-md-4">
 			<input ng-model="playlistURI" style="width: 100%" type="text" class="form-control search-query span2" placeholder="Enter playlist URI or HTTP link">
 		</div>		
-		<button ng-disabled="!playlistURI" class="btn btn-primary btn-md" ng-click="getPlaylist()">Get Playlist</button>
-		<button class="btn btn-success btn-md" ng-click="getNMT()">Get NMT</button>
+		<a ng-href="#/home?playlist={{playlistURI}}" ng-disabled="!playlistURI" class="btn btn-primary btn-md" ng-click="getPlaylist()">Get Playlist</a>
+		<a ng-href="#/home?playlist=spotify:user:spotify:playlist:1yHZ5C3penaxRdWR7LRIObplaylistURI" class="btn btn-success btn-md" ng-click="getNMT()">Get NMT</a>
 	</div>
 	<br>
 	<div id="currentPlaylist" class="panel panel-default">
 		<table class="table table-striped table-hover table-default">
 			<thead>
-				<th><a>Track Name</a></th>
+				<th><a>Track Name</a> - <span class="badge">{{playlist.length}}</span></th>
 				<th><a>Artist</a></th>
 				<th><a>Track Popularity</a></th>
 				<th></th>

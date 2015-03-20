@@ -1,4 +1,4 @@
-/*! nmt 2015-03-15 */
+/*! nmt 2015-03-19 */
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -69820,14 +69820,14 @@ angular.module('nmtApp', [
 			host: 'http://localhost:5000'
 		},
 		prod: {
-			host: 'https://nmtapp.herokuapp.com'
+			host: 'https://nmtapp.herokuapp.com:5000'
 		}
 	}
 })
 
 .factory('SpotifyService',['Restangular', 'nmtAppConfig', function(Restangular, nmtAppConfig){
 	return Restangular.withConfig(function(RestangularConfigurer){
-		var baseUrl = nmtAppConfig.environment.dev.host;
+		var baseUrl = nmtAppConfig.environment.prod.host;
 		RestangularConfigurer.setBaseUrl(baseUrl);
 	});
 }])
@@ -69855,6 +69855,7 @@ angular.module('nmtApp', [
 		url: '/home?playlist',
 		templateUrl: 'views/home.html',
 		controller: 'MainController',
+		reloadOnSearch: false,
 		data: {
 			contentPages: 1,
 		}
@@ -69884,6 +69885,7 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	var httpSliced = null;
 	var uriSliced = null;
 	$scope.playlistURI = $stateParams.playlist;
+	var totalCount = 0;
 	/*
 	* got to parse URI for http links or URI links - YOLO ** 
 	* grabs user name and playlist #
@@ -69902,15 +69904,34 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	};
 
 	$scope.getPlaylist = function(){
-		$stateParams.playlist = $scope.playlistURI;
+		totalCount += 1;
+		console.log('COUNT: ', totalCount);
 		$scope.parseURI();
 		PlaylistService.getPlaylist($scope.spotify).then(function(response){
-			$scope.playlist = response.tracks.items;
-			$scope.playlistMeta = response;
+			try{
+				if(response.tracks.items){
+					$scope.playlist = response.tracks.items;
+					$scope.playlistMeta = response;
+					if($scope.playlistMeta.tracks.next){
+						$scope.spotify[0].options = {offset: parseInt($scope.playlistMeta.tracks.next.split("=")[1].substring(0,3)), limit:100};
+						$scope.getPlaylist();
+					}
+				}
+			}catch(e){
+				if(response.items){
+					$scope.playlist = $scope.playlist.concat(response.items);
+					if(response.next){
+						$scope.spotify[0].options = {offset: parseInt(response.next.split("=")[1].substring(0,3)), limit:100};
+						$scope.getPlaylist();
+					}
+				}
+			}
 		});
 	};
 
 	$scope.getNMT = function(){
+		$scope.playlistURI = "spotify:user:spotify:playlist:1yHZ5C3penaxRdWR7LRIOb";
+		$scope.spotify = [{user: null, playlist: null}];
 		$scope.spotify[0].user = 'spotify';
 		$scope.spotify[0].playlist = '1yHZ5C3penaxRdWR7LRIOb';
 		PlaylistService.getPlaylist($scope.spotify).then(function(response){
@@ -69982,8 +70003,8 @@ controller('SearchController', ['$scope', 'PlaylistService', '$filter', '$state'
 	};
 
 	$scope.getPlaylist = function(playlistUri){
-		$state.go('home');
 		$rootScope.playlistURI = playlistUri;
+		$state.go('home');
 	};
 
 }]);;angular.module('nmtApp.services').

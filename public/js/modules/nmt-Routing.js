@@ -18,6 +18,7 @@ angular.module('nmtApp')
 		url: '/home?playlist',
 		templateUrl: 'views/home.html',
 		controller: 'MainController',
+		reloadOnSearch: false,
 		data: {
 			contentPages: 1,
 		}

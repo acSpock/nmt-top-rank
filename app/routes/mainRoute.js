@@ -57,9 +57,10 @@ module.exports = function(app){
 
 		var playlist = req.body;
 		var user = playlist[0].user;
-		var playlistId = playlist[0].playlist
+		var playlistId = playlist[0].playlist;
+		var options = playlist[0].options;
 
-		spotifyApi.getPlaylist(user, playlistId, 100).then(function(data) {
+		spotifyApi.getPlaylist(user, playlistId, options).then(function(data) {
 			console.log('Some information about this playlist', data);
 			res.send(data);
 		}, function(err) {

@@ -5,14 +5,14 @@ angular.module('nmtApp')
 			host: 'http://localhost:5000'
 		},
 		prod: {
-			host: 'https://nmtapp.herokuapp.com'
+			host: 'https://nmtapp.herokuapp.com:5000'
 		}
 	}
 })
 
 .factory('SpotifyService',['Restangular', 'nmtAppConfig', function(Restangular, nmtAppConfig){
 	return Restangular.withConfig(function(RestangularConfigurer){
-		var baseUrl = nmtAppConfig.environment.dev.host;
+		var baseUrl = nmtAppConfig.environment.prod.host;
 		RestangularConfigurer.setBaseUrl(baseUrl);
 	});
 }])
