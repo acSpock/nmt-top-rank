@@ -26,8 +26,6 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	};
 
 	$scope.getPlaylist = function(){
-		totalCount += 1;
-		console.log('COUNT: ', totalCount);
 		$scope.parseURI();
 		PlaylistService.getPlaylist($scope.spotify).then(function(response){
 			try{

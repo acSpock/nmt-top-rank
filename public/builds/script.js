@@ -1,4 +1,4 @@
-/*! nmt 2015-03-19 */
+/*! nmt 2015-03-25 */
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -69904,8 +69904,6 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	};
 
 	$scope.getPlaylist = function(){
-		totalCount += 1;
-		console.log('COUNT: ', totalCount);
 		$scope.parseURI();
 		PlaylistService.getPlaylist($scope.spotify).then(function(response){
 			try{
