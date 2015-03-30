@@ -19,7 +19,8 @@ module.exports = function(grunt){
 		'public/js/controllers/devController.js',
 		'public/js/controllers/searchController.js',
 		'public/js/services/**/*.js',
-		'public/js/filters/**/*.js'
+		'public/js/filters/**/*.js',
+		'public/js/directives/**/*.js'
 	],
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),

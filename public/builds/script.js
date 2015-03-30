@@ -1,4 +1,4 @@
-/*! nmt 2015-03-25 */
+/*! nmt 2015-03-30 */
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -69820,14 +69820,14 @@ angular.module('nmtApp', [
 			host: 'http://localhost:5000'
 		},
 		prod: {
-			host: 'https://nmtapp.herokuapp.com'
+			host: 'nmtapp.herokuapp.com'
 		}
 	}
 })
 
 .factory('SpotifyService',['Restangular', 'nmtAppConfig', function(Restangular, nmtAppConfig){
 	return Restangular.withConfig(function(RestangularConfigurer){
-		var baseUrl = nmtAppConfig.environment.prod.host;
+		var baseUrl = nmtAppConfig.environment.dev.host;
 		RestangularConfigurer.setBaseUrl(baseUrl);
 	});
 }])
@@ -70046,4 +70046,49 @@ filter('object2Array', [function(){
 		}
 		return input;
 	};
-}]);
+}])
+.filter('popularityFilter', [function(){
+	return function(input, value){
+		var filtered = [];
+		if(!value){
+			return input;
+		}
+		for(var i in input){
+			if (input[i].popularity > parseInt(value)){
+				filtered.push(input[i]);
+			}
+		}
+		return filtered;
+	};
+}]);;angular.module('nmtApp.directives').
+directive("sort", function() {
+return {
+		restrict: 'A',
+		transclude: true,
+		template : 
+			'<a ng-click="onClick()">'+
+				'<span ng-transclude></span>'+ 
+				' <i style="color: #428bca" class="fa fa-sort"></i>' +
+			'</a>',
+		scope: {
+			order: '=',
+			by: '=',
+			reverse : '=',
+			init: '='
+		},
+		link: function(scope, element, attrs) {
+			if(scope.init){
+				scope.by = scope.init;
+			}
+			
+			scope.onClick = function () {
+				if( scope.order === scope.by ) {
+					scope.reverse = !scope.reverse; 
+				} else {
+					scope.by = scope.order ;
+					scope.reverse = true; 
+				}
+			};
+		}
+};
+});
