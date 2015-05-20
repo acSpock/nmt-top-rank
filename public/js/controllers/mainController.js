@@ -52,7 +52,7 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 		});
 	};
 
-	$scope.getNMT = function(){
+	$rootScope.getNMT = function(){
 		$scope.playlistURI = "spotify:user:spotify:playlist:1yHZ5C3penaxRdWR7LRIOb";
 		$scope.spotify = [{user: null, playlist: null}];
 		$scope.spotify[0].user = 'spotify';
