@@ -5,6 +5,7 @@
   "author": "Andy Spock & Jeff",
   "private": true,
   "dependencies": {
+    "grunt": "~0.4.2",
     "body-parser": "~1.10.2",
     "cookie-parser": "latest",
     "debug": "~2.1.1",
