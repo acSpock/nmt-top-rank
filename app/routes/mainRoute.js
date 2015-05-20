@@ -3,7 +3,7 @@ module.exports = function(app){
 	//spotify api auth
 	var clientId = '35c547d034a54d188c7138be55a5fe67'; // Your client id
 	var clientSecret = '98726d99fca94661aad8b50f7939b679'; // Your secret
-	var redirectUri = 'http://localhost:3000/#/home'; // Your redirect uri
+	var redirectUri = 'http://localhost:5000/#/home'; // Your redirect uri
 	//var redirectUri = 'https://nmtapp.herokuapp.com/#/home'; // Your redirect uri
 	var SpotifyWebApi = require('spotify-web-api-node');
 	var scopes = ['user-read-private', 'user-read-email'];
@@ -25,7 +25,6 @@ module.exports = function(app){
 	});
 
 	var getAccessToken = function(){
-		console.log('Gets here then what?');
 		spotifyApi.clientCredentialsGrant().then(function(data) {
 			spotifyApi.setAccessToken(data['access_token']);
 			console.log('The access token is ' + data['access_token']);
@@ -56,7 +55,6 @@ module.exports = function(app){
 
 
 	app.post('/api/playlist', function(req, res){
-
 		var playlist = req.body;
 		var user = playlist[0].user;
 		var playlistId = playlist[0].playlist;
@@ -78,17 +76,13 @@ module.exports = function(app){
 	
 	app.get('/api/searchForPlaylist', function(req, res){
 		//var search = req.param
-
-
-	spotifyApi.searchPlaylists(req.query.search)
-	  .then(function(data) {
-	    console.log('Found playlists are', data);
-	    res.send(data);
-	  }, function(err) {
-	    console.log('Something went wrong!', err);
-	  });
-		
-	});
-
-
+		spotifyApi.searchPlaylists(req.query.search)
+		  .then(function(data) {
+		    console.log('Found playlists are', data);
+		    res.send(data);
+		  }, function(err) {
+		    console.log('Something went wrong!', err);
+		  });
+			
+		});
 };

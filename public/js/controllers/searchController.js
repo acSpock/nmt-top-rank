@@ -11,9 +11,4 @@ controller('SearchController', ['$scope', 'PlaylistService', '$filter', '$state'
 		});
 	};
 
-	$scope.getPlaylist = function(playlistUri){
-		$rootScope.playlistURI = playlistUri;
-		$state.go('home');
-	};
-
 }]);

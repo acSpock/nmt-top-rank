@@ -1,5 +1,4 @@
 <div class="container">
-
 	<div id="search form" class="row">
 		<div class="col-sm-8 col-sm-offset-2 text-center">
 			<form ng-submit="searchPlaylist()">
@@ -12,7 +11,7 @@
 	<div>
 		<div class="col-md-12">
 			<div ng-repeat="playlist in foundPlaylist" class="alpha60">
-				<a ng-href="#/home?playlist={{playlist.uri}}" ng-click="getPlaylist(playlist.uri)" style="background: url({{playlist.images[0].url}})" class="box col-md-6">
+				<a ng-href="#/home?playlist={{playlist.uri}}" style="background: url({{playlist.images[0].url}})" class="box col-md-6">
 					<p class="text-center">{{playlist.name}}</p>
 				</a>
 			</div>

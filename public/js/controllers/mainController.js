@@ -4,10 +4,11 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	$scope.playlist = null;
 	$scope.playlistMeta = null;
 	$scope.spotify = [{user: null, playlist: null}];
+	$scope.playlistURI = $stateParams.playlist;
 	var httpSliced = null;
 	var uriSliced = null;
-	$scope.playlistURI = $stateParams.playlist;
 	var totalCount = 0;
+
 	/*
 	* got to parse URI for http links or URI links - YOLO ** 
 	* grabs user name and playlist #
@@ -35,6 +36,7 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 					if($scope.playlistMeta.tracks.next){
 						$scope.spotify[0].options = {offset: parseInt($scope.playlistMeta.tracks.next.split("=")[1].substring(0,3)), limit:100};
 						$scope.getPlaylist();
+						count += 1;
 					}
 				}
 			}catch(e){
@@ -43,6 +45,7 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 					if(response.next){
 						$scope.spotify[0].options = {offset: parseInt(response.next.split("=")[1].substring(0,3)), limit:100};
 						$scope.getPlaylist();
+						count += 1;
 					}
 				}
 			}
