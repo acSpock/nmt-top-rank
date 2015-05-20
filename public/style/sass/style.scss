@@ -4,8 +4,18 @@
 @import "public/libs/bootswatch-scss/cyborg/bootswatch";
 
 html, body {
-	min-height: 100%;
 	height: 100%;
+	min-height: 100%;
+}
+
+body{
+	background-color: transparent;
+}
+
+html{
+	background: url('../images/bg2.jpg') no-repeat center center fixed;;
+	background-size: cover;
+	opacity: .9;
 }
 
 a{
@@ -51,6 +61,7 @@ input[type=text]{
 }
 
 #main-wrap{
+
 	padding-top: 0px;
 
 	.playlistTitle{
@@ -80,4 +91,13 @@ input[type=text]{
 	min-width: 100%;
 	height: 10px;
 	color: #81B819;
+}
+
+.paragraph{
+	font-size: 1.4em;
+	line-height: 1.6;
+}
+
+#navbartop{
+	background: black;
 }

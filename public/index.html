@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html ng-app="nmtApp">
 <head>
-	<title>NMT</title>
+	<title>Popularfy</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="builds/style.css">
 </head>
 <body ng-controller="MainController">
 	<div id="main-wrap">
-		<nav class="navbar navbar-fixed">
+		<nav id="navbartop" class="navbar navbar-fixed">
 		  <div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-			  <a class="navbar-brand" style="color: #81B819" href="#/home">NMT Playlists</a>
+			  <a class="navbar-brand" style="color: #81B819" href="#/home">Popularfy</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a ui-sref="playlistSearch">Search Playlists</a></li>
 			</ul>
+			<span class="pull-right" style="margin-top:10px; margin-left: 10px;  margin-right: 10px">
+
+			<div class="fb-like" data-href="http://www.popularfy.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
+			</span>
+			&nbsp;&nbsp;&nbsp;
+			<span class="pull-right" style="margin-top:10px">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://popularfy.com" data-via="acspock" data-hashtags="popularfy">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			</span>
+
 		  </div>
 		</nav>
 		<div id="inner-wrapper" class="row fill" ui-view></div>
 	</div>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 	<script src="builds/script.js"></script>
 </body>
 </html>

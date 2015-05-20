@@ -1,18 +1,21 @@
 <div class="container">
-	<div class="row">
+	<div ng-hide="playlist === null" class="row">
 		<div class="playlistTitle form-group col-md-6">
 			<span ng-show="playlistMeta">{{playlistMeta.name}}</span>
-			<span ng-hide="playlistMeta">Playlists Popular Songs</span>
+			<span ng-hide="playlistMeta">Popular Songs in Playlist</span>
 			<!-- <a ui-sref="dev">Dev</a>	 -->
 		</div>			
-		<div class="form-group col-md-4">
-			<input ng-model="playlistURI" style="width: 100%" type="text" class="form-control search-query span2" placeholder="Enter playlist URI or HTTP link">
+
+		<div class="form-group col-md-5">
+			<input ng-model="playlistURI" style="" type="text" class="form-control search-query span2" placeholder="Enter playlist URI or HTTP link">
 		</div>
-	
-		<a ng-href="#/home?playlist={{playlistURI}}" ng-disabled="!playlistURI" class="btn btn-primary btn-md" ng-click="getPlaylist()">Get Playlist</a>
-		<a ng-href="#/home?playlist=spotify:user:spotify:playlist:1yHZ5C3penaxRdWR7LRIObplaylistURI" class="btn btn-success btn-md" ng-click="getNMT()">Get NMT</a>
+		<div class="form-group col-md-1">
+			<a ng-href="#/home?playlist={{playlistURI}}" ng-disabled="!playlistURI" class="btn btn-primary btn-md pull-right" ng-click="getPlaylist()">Get Playlist</a>
+		</div>
+	</div>
+	<div class="row">
 		<div class="divider"></div>
-		<div class="row">
+		<div class="row" id="filterForPlaylist" ng-hide="playlist === null">
 			<div class="col-md-12">
 				<div class="form-group col-md-7">
 					<input ng-model="playlistFilter" style="width: 100%" type="text" class="form-control search-query span2" placeholder="Filter by song or artist">
@@ -25,28 +28,64 @@
 		</div>
 	</div>
 	<br>
-	<div id="currentPlaylist" class="panel panel-default">
-		<table class="table table-striped table-hover table-default">
-			<thead>
-				<th sort order="'track.name'" by="order" reverse="reverse" init="">Track Name - <span class="badge">{{playlist.length}}</span></th>
-				<th sort order="'track.artists[0].name'" by="order" reverse="reverse" init=""><a>Artist</a></th>
-				<th sort order="'popularity'" by="order" reverse="reverse" init="'-popularity'"><a>Track Popularity</a></th>
-				<th></th>
-			</thead>
-			<tbody>
-				<tr ng-repeat="track in playlist | orderBy:order:reverse | object2Array | filter:playlistFilter | popularityFilter:value">
-					<td>
-						{{track.track.name}}
-					</td>
-					<td>
-						{{track.track.artists[0].name}}
-					</td>					
-					<td>
-						<div class="col-sm-12"><progressbar value="track.popularity" max="100">{{track.popularity}}</progressbar></div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="panel-body empty text-center" ng-show="playlist === null">No Playlist Found</div>
+	<div class="row" ng-hide="playlist === null">
+		<div class="col-md-12">
+			<div id="currentPlaylist" class="panel panel-default">
+				<table class="table table-striped table-hover table-default">
+					<thead>
+						<th sort order="'track.name'" by="order" reverse="reverse" init="">Track Name - <span class="badge">{{playlist.length}}</span></th>
+						<th sort order="'track.artists[0].name'" by="order" reverse="reverse" init=""><a>Artist</a></th>
+						<th sort order="'popularity'" by="order" reverse="reverse" init="'-popularity'"><a>Track Popularity</a></th>
+						<th></th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="track in playlist | orderBy:order:reverse | object2Array | filter:playlistFilter | popularityFilter:value">
+							<td>
+								{{track.track.name}}
+							</td>
+							<td>
+								{{track.track.artists[0].name}}
+							</td>					
+							<td>
+								<div class="col-sm-12"><progressbar value="track.popularity" max="100">{{track.popularity}}</progressbar></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="panel-body empty text-center" ng-show="playlist === null">No Playlist Found</div>
+			</div>
+		</div>
 	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="row" style="margin: auto;">
+		<div class="col-md-6 col-md-offset-3 text-center">
+			<h2 class="paragraph" ng-show="playlist === null">Ever wish you could sort through a playlist by popularity? Now you can! Try out the New Music Tuesday playlist or paste a playlist URI/http link!</h2>
+			<br>
+
+			<a ng-show="playlist=== null" ng-href="#/home?playlist=spotify:user:spotify:playlist:1yHZ5C3penaxRdWR7LRIObplaylistURI" class="btn btn-success btn-md" ng-click="getNMT()">Get New Music Tuesday</a>
+
+
+			
+			<div ng-show="playlist === null" class="row">
+				<br>
+				<br>
+				or
+				<br>
+				<br>
+				<div class="col-md-12"> 
+					<div class="form-group col-md-9">
+						<input ng-model="playlistURI" style="" type="text" class="form-control search-query span2" placeholder="Enter playlist URI or HTTP link">
+					</div>
+					<div class="form-group pull-right col-md-2">
+						<a ng-href="#/home?playlist={{playlistURI}}" ng-disabled="!playlistURI" class="btn btn-primary btn-md pull-right" ng-click="getPlaylist()">Get Playlist</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 </div>
