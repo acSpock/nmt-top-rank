@@ -28,10 +28,6 @@ module.exports = function(grunt){
 			dist: {
 				options: {
 					loadPath: [
-						'public/libs/bootstrap-sass-official/assets/stylesheets/',
-						'public/libs/bootstrap-sass-official/assets/stylesheets/bootstrap/',
-						'public/libs/font-awesome/scss',
-						'public/libs/bootswatch-scss/cyborg/'
 					],
 					style: 'compressed'
 				},
