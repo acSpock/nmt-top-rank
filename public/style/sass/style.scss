@@ -1,7 +1,6 @@
 @import "public/libs/bootswatch-scss/cyborg/variables";
-@import "public/libs/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
-@import "public/libs/bootstrap-sass-official/assets/stylesheets/bootstrap";
-@import "public/libs/bootswatch-scss/cyborg/bootswatch";
+@import "bootstrap";
+@import "bootswatch";
 
 html, body {
 	height: 100%;
