@@ -2,7 +2,7 @@ module.exports = function(app){
 
 	//spotify api auth
 	var clientId = '35c547d034a54d188c7138be55a5fe67'; // Your client id
-	var clientSecret = '98726d99fca94661aad8b50f7939b679'; // Your secret
+	var clientSecret = '136e998802bd4881bfa9c79317355de7'; // Your secret
 	var redirectUri = 'http://localhost:5000/#/home'; // Your redirect uri
 	//var redirectUri = 'https://nmtapp.herokuapp.com/#/home'; // Your redirect uri
 	var SpotifyWebApi = require('spotify-web-api-node');
