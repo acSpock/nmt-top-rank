@@ -44,7 +44,9 @@
 					<tbody>
 						<tr class="track-row" ng-repeat="track in playlist | orderBy:order:reverse | object2Array | filter:playlistFilter | popularityFilter:value">
 							<td class="playButton">
-								<a href="" ng-click='playSong(track.track.album.images[2].url, track.track.preview_url)'><i class="fa fa-play-circle" style="font-size: 16"></i></a>
+								<button class="btn btn-success btn-xs" ng-click='playSong(track.track.album.images[2].url, track.track.preview_url)'><i class="fa fa-play-circle" style="font-size: 16"> Preview </i></button>
+								&nbsp; <span style="font-size: 14px">or</span> &nbsp;
+								<button class="btn btn-xs btn-success" ng-click='playInsideSpotify(track.track.uri)'>Play in Spotify</button>
 							</td>
 							<td>
 								{{track.track.name}}
@@ -101,6 +103,7 @@
 			<img ng-src="{{nowPlayingImage}}">
 			<audio autoplay="autoplay" ng-src="{{currentSongUrl}}" controls="controls">
 			</audio>
+			<iframe ng-src="{{playSpotify}}" width="0" height="0" frameborder="0" allowtransparency="true"></iframe>
 		</div>	
 	
 	</span>

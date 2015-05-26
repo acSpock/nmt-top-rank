@@ -8,6 +8,11 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	$scope.currentlySelectedSong = null;
 	$scope.currentSongUrl = null;
 	$scope.nowPlayingImage = null;
+	$scope.playSpotify = null;
+	
+	$scope.playPreview = null;
+	$scope.playSpotify = null;
+
 	var httpSliced = null;
 	var uriSliced = null;
 	var totalCount = 0;
@@ -67,9 +72,15 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	};	
 
 	$scope.playSong = function(img, previewUrl){
+		$scope.playPreview = true;
 		$scope.currentSongUrl = $sce.trustAsResourceUrl(previewUrl);
 		$scope.nowPlayingImage = img;
 
+	};
+
+	$scope.playInsideSpotify = function(uri){
+		
+		$scope.playSpotify = $sce.trustAsResourceUrl(uri);
 	};
 
 	if($scope.playlistURI){
