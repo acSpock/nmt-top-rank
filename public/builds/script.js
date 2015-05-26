@@ -71840,7 +71840,9 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 
 	$scope.playInsideSpotify = function(uri){
 		$scope.playSpotify = true;
+		document.getElementById('previewControl').pause();
 		$scope.playSpotify = $sce.trustAsResourceUrl(uri);
+
 	};
 
 	if($scope.playlistURI){

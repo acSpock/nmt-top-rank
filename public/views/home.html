@@ -101,7 +101,7 @@
 		&nbsp;
 		<div class="form-group audio-play">
 			<img ng-src="{{nowPlayingImage}}">
-			<audio autoplay="autoplay" ng-src="{{currentSongUrl}}" controls="controls">
+			<audio id="previewControl" autoplay="autoplay" ng-src="{{currentSongUrl}}" controls="controls">
 			</audio>
 			<iframe ng-src="{{playSpotify}}" width="0" height="0" frameborder="0" allowtransparency="true"></iframe>
 		</div>	
