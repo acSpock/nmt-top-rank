@@ -67,9 +67,6 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 	};	
 
 	$scope.playSong = function(img, previewUrl){
-/*		if(playInstance){
-			delete playInstance;
-		}*/
 		$scope.currentSongUrl = $sce.trustAsResourceUrl(previewUrl);
 		$scope.nowPlayingImage = img;
 

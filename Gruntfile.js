@@ -74,6 +74,15 @@ module.exports = function(grunt){
 				max_jshint_notifications: 5
 			}
 		},
+		copy: {
+			fonts: {
+				expand: true,
+				flatten: true,
+				filter: 'isFile',
+				src: ['public/libs/font-awesome/fonts/**'],
+				dest: 'public/fonts'
+			}
+		},
 		notify: {
 			complete: {
 				options: {
@@ -83,10 +92,11 @@ module.exports = function(grunt){
 		}
 	});
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-notify');
-	grunt.registerTask('default',['jshint', 'sass', 'concat', 'notify:complete']);
+	grunt.registerTask('default',['jshint', 'sass', 'concat', 'copy', 'notify:complete']);
 }
