@@ -1,4 +1,5 @@
 @import "public/libs/bootswatch-scss/cyborg/variables";
+@import "font-awesome";
 @import "bootstrap";
 @import "bootswatch";
 
@@ -81,6 +82,16 @@ input[type=text]{
 					}
 				}
 			}
+
+			td{
+				vertical-align: middle;
+			}
+
+			td.playButton{
+				font-size: 1.5em;
+				padding-right: 2px;
+				padding-left: 15px;
+			}
 		}
 	}
 }
@@ -99,4 +110,24 @@ input[type=text]{
 
 #navbartop{
 	background: black;
+}
+
+.playNowWidget{
+	position: fixed;
+	bottom:0;
+	background: rgba(44, 43, 43, 1);
+	height: 80px;
+	min-width: 100%;
+	overflow: hidden;
+	text-align: center;
+	border-top: 4px solid rgba(0, 0, 0, 1);
+}
+
+.audio-play{
+	margin-top: 5px;
+
+	audio{
+		vertical-align:inherit;
+		margin-left: 5px;
+	}
 }

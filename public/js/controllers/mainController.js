@@ -1,10 +1,13 @@
 angular.module('nmtApp.controllers').
-controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', '$stateParams', '$rootScope', function($scope, PlaylistService, $filter, $state, $stateParams, $rootScope){
+controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', '$stateParams', '$rootScope', '$sce', '$http', function($scope, PlaylistService, $filter, $state, $stateParams, $rootScope, $sce, $http){
 	$scope.user = null;
 	$scope.playlist = null;
 	$scope.playlistMeta = null;
 	$scope.spotify = [{user: null, playlist: null}];
 	$scope.playlistURI = $stateParams.playlist;
+	$scope.currentlySelectedSong = null;
+	$scope.currentSongUrl = null;
+	$scope.nowPlayingImage = null;
 	var httpSliced = null;
 	var uriSliced = null;
 	var totalCount = 0;
@@ -62,6 +65,15 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 			$scope.playlistMeta = response;
 		});
 	};	
+
+	$scope.playSong = function(img, previewUrl){
+/*		if(playInstance){
+			delete playInstance;
+		}*/
+		$scope.currentSongUrl = $sce.trustAsResourceUrl(previewUrl);
+		$scope.nowPlayingImage = img;
+
+	};
 
 	if($scope.playlistURI){
 		$scope.getPlaylist();

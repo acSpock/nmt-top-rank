@@ -12,7 +12,7 @@ angular.module('nmtApp')
 
 .factory('SpotifyService',['Restangular', 'nmtAppConfig', function(Restangular, nmtAppConfig){
 	return Restangular.withConfig(function(RestangularConfigurer){
-		var baseUrl = nmtAppConfig.environment.prod.host;
+		var baseUrl = nmtAppConfig.environment.dev.host;
 		RestangularConfigurer.setBaseUrl(baseUrl);
 	});
 }])

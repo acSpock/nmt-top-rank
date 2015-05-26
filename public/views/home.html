@@ -33,13 +33,19 @@
 			<div id="currentPlaylist" class="panel panel-default">
 				<table class="table table-striped table-hover table-default">
 					<thead>
-						<th sort order="'track.name'" by="order" reverse="reverse" init="">Track Name - <span class="badge">{{playlist.length}}</span></th>
+						<th></th>
+						<th sort order="'track.name'" by="order" reverse="reverse" init="">
+							Track Name - <span class="badge">{{playlist.length}}</span>
+						</th>
 						<th sort order="'track.artists[0].name'" by="order" reverse="reverse" init=""><a>Artist</a></th>
 						<th sort order="'popularity'" by="order" reverse="reverse" init="'-popularity'"><a>Track Popularity</a></th>
 						<th></th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="track in playlist | orderBy:order:reverse | object2Array | filter:playlistFilter | popularityFilter:value">
+						<tr class="track-row" ng-repeat="track in playlist | orderBy:order:reverse | object2Array | filter:playlistFilter | popularityFilter:value">
+							<td class="playButton">
+								<a href="" ng-click='playSong(track.track.album.images[2].url, track.track.preview_url)'><i class="fa fa-play-circle" style="font-size: 16"></i></a>
+							</td>
 							<td>
 								{{track.track.name}}
 							</td>
@@ -84,6 +90,19 @@
 			</div>
 		</div>
 	</div>
-
+</div>
+<div class="playNowWidget" ng-show="currentSongUrl !== null">
+	<span  class="form-inline">
+		<div class="form-group">
+			<h4 >Currently Playing</h4>
+		</div>
+		&nbsp;
+		<div class="form-group audio-play">
+			<img ng-src="{{nowPlayingImage}}">
+			<audio autoplay="autoplay" ng-src="{{currentSongUrl}}" controls="controls">
+			</audio>
+		</div>	
+	
+	</span>
 
 </div>
