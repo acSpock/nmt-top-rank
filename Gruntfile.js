@@ -27,6 +27,7 @@ module.exports = function(grunt){
 		sass: {
 			dist: {
 				options: {
+					noCache: true,
 					loadPath: [
 						'public/libs/bootstrap-sass-official/assets/stylesheets/',
 						'public/libs/bootstrap-sass-official/assets/stylesheets/bootstrap/',
