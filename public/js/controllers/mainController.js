@@ -71,7 +71,7 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 		});
 	};	
 
-	$scope.playSong = function(img, previewUrl){
+	$scope.playSong = function(img, previewUrl, i){
 		$scope.playSpotify = false;
 		$scope.currentSongUrl = $sce.trustAsResourceUrl(previewUrl);
 		$scope.nowPlayingImage = img;

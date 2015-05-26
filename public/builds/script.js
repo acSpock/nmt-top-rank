@@ -71708,7 +71708,7 @@ angular.module('nmtApp', [
 
 .factory('SpotifyService',['Restangular', 'nmtAppConfig', function(Restangular, nmtAppConfig){
 	return Restangular.withConfig(function(RestangularConfigurer){
-		var baseUrl = nmtAppConfig.environment.prod.host;
+		var baseUrl = nmtAppConfig.environment.dev.host;
 		RestangularConfigurer.setBaseUrl(baseUrl);
 	});
 }])
@@ -71831,7 +71831,7 @@ controller('MainController', ['$scope', 'PlaylistService', '$filter', '$state', 
 		});
 	};	
 
-	$scope.playSong = function(img, previewUrl){
+	$scope.playSong = function(img, previewUrl, i){
 		$scope.playSpotify = false;
 		$scope.currentSongUrl = $sce.trustAsResourceUrl(previewUrl);
 		$scope.nowPlayingImage = img;
